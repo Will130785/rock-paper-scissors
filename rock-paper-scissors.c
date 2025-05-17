@@ -4,6 +4,7 @@
 #include <stdbool.h>
 
 int generateRandomNumber();
+bool processTurn(int userGuess, int computerGuess);
 
 int main(void)
 {
@@ -21,40 +22,7 @@ int main(void)
     {
         scanf("%d", &userInput);
         computerInput = generateRandomNumber();
-        if (userInput == computerInput)
-        {
-            printf("You both chose the same option, choose again");
-        }
-        else if (userInput == 0 && computerInput == 1)
-        {
-            printf("You chose rock, the computer chose paper - computer wins");
-            gameOver = true;
-        }
-        else if (userInput == 1 && computerInput == 0)
-        {
-            printf("You chose paper, the computer chose rock - you win");
-            gameOver = true;
-        }
-        else if (userInput == 2 && computerInput == 0)
-        {
-            printf("You chose scissors the computer chose rock - computer wins");
-            gameOver = true;
-        }
-        else if (userInput == 0 && computerInput == 2)
-        {
-            printf("You chose rock, the computer chose scissors - you win");
-            gameOver = true;
-        }
-        else if (userInput == 1 && computerInput == 2)
-        {
-            printf("You chose paper, the computer chose scissors - computer wins");
-            gameOver = true;
-        }
-        else if (userInput == 2 && computerInput == 1)
-        {
-            printf("You chose scissors, the computer chose paper - you win");
-            gameOver = true;
-        }
+        gameOver = processTurn(userInput, computerInput);
     }
     return 0;
 }
@@ -63,4 +31,43 @@ int generateRandomNumber()
 {
     srand(time(NULL));
     return rand() % 3;
+}
+
+bool processTurn(int userGuess, int computerGuess)
+{
+    if (userGuess == computerGuess)
+    {
+        printf("You both chose the same option, choose again");
+    }
+    else if (userGuess == 0 && computerGuess == 1)
+    {
+        printf("You chose rock, the computer chose paper - computer wins");
+        return true;
+    }
+    else if (userGuess == 1 && computerGuess == 0)
+    {
+        printf("You chose paper, the computer chose rock - you win");
+        return true;
+    }
+    else if (userGuess == 2 && computerGuess == 0)
+    {
+        printf("You chose scissors the computer chose rock - computer wins");
+        return true;
+    }
+    else if (userGuess == 0 && computerGuess == 2)
+    {
+        printf("You chose rock, the computer chose scissors - you win");
+        return true;
+    }
+    else if (userGuess == 1 && computerGuess == 2)
+    {
+        printf("You chose paper, the computer chose scissors - computer wins");
+        return true;
+    }
+    else if (userGuess == 2 && computerGuess == 1)
+    {
+        printf("You chose scissors, the computer chose paper - you win");
+        return true;
+    }
+    return false;
 }
